@@ -27,7 +27,8 @@ scripts/icista_m2_benchmark.py   generation (Ollama), extraction, pytest executi
 scripts/detectors.py             RVH / IIH detectors (copied verbatim from our MMC study)
 scripts/analyze_icista.py        pass rates, 95% Wilson intervals, Fisher tests -> statistics_icista.json
 scripts/classify_failures.py     failure taxonomy from the pytest outputs -> failure_categories.json
-scripts/make_figure_icista.py    Fig. 1
+scripts/make_figure_icista.py    outcome figure (failure categories per model)
+scripts/make_figures_extra.py    protocol diagram and cost-quality figure
 results/runs_<model>/            one folder per model: results.json (settings, hashes, Ollama model details,
                                  per-run summary) and run_XX/ with raw_llm_output.txt, pipeline.py,
                                  test_pipeline.py and analysis.json (pytest output, detector verdicts, cost)
