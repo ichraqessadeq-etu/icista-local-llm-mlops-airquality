@@ -1,0 +1,44 @@
+{
+  "run": 18,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1234,
+    "truncated": false,
+    "seconds": 151.9
+  },
+  "extraction": {
+    "n_blocks": 3,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 0,
+    "failed": 4,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "\n    def train_model(X_train, y_train):\n        \"\"\"Train a RandomForest classifier.\"\"\"\n        try:\n            # Initialize the model\n            model = RandomForestClassifier(random_state=42)\n    \n            # Train the model\n            model.fit(X_train, y_train)\n    \n            # Log the model to MLflow\n            mlflow.sklearn.log_model(model, \"anomaly_detector\")\n    \n            return model\n        except Exception as e:\n>           raise ValueError(f\"An error occurred during model training: {e}\")\nE           ValueError: An error occurred during model training: Found input variables with inconsistent numbers of samples: [5806, 1452]\n\npipeline.py:50: ValueError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - NameError: name 'pd' is not defined\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'pd' is not d...\nFAILED test_pipeline.py::test_train_model - NameError: name 'RandomForestClas...\nFAILED test_pipeline.py::test_predict_anomalies - ValueError: An error occurr...\n4 failed in 11.63s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

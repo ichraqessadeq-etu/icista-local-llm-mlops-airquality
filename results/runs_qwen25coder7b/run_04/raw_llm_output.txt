@@ -1,0 +1,144 @@
+Sure, here is a production-ready CI/CD pipeline for a RandomForest anomaly detector. This pipeline includes a Python module `pipeline.py` with functions to load and preprocess data, train a model, and a pytest file `test_pipeline.py` for testing. Additionally, a GitHub Actions YAML file is provided to automate the pipeline.
+
+### 1. Python Module `pipeline.py`
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from mlflow import log_param, log_metric, log_model
+
+def load_data(file_path):
+    """Load data from a CSV file."""
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        raise Exception(f"Failed to load data: {e}")
+
+def preprocess_data(data):
+    """Preprocess data to separate features and target."""
+    try:
+        X = data.drop(columns=['Anomaly'])
+        y = data['Anomaly']
+        return X, y
+    except Exception as e:
+        raise Exception(f"Failed to preprocess data: {e}")
+
+def train_model(X_train, y_train):
+    """Train a RandomForestClassifier model."""
+    try:
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
+        
+        # Log model parameters and metrics
+        log_param("n_estimators", 100)
+        log_metric("accuracy", model.score(X_train, y_train))
+        
+        return model
+    except Exception as e:
+        raise Exception(f"Failed to train model: {e}")
+
+def main():
+    """Main function to load data, preprocess, and train model."""
+    try:
+        data = load_data('data/air_quality.csv')
+        X, y = preprocess_data(data)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        model = train_model(X_train, y_train)
+        
+        # Log model
+        log_model(model, artifact_path="model")
+    except Exception as e:
+        raise Exception(f"Failed to execute main pipeline: {e}")
+
+if __name__ == "__main__":
+    main()
+```
+
+### 2. Pytest File `test_pipeline.py`
+
+```python
+import pandas as pd
+from pipeline import load_data, preprocess_data, train_model
+
+def test_load_data():
+    """Test loading data."""
+    data = load_data('data/air_quality.csv')
+    assert isinstance(data, pd.DataFrame)
+    assert not data.empty
+
+def test_preprocess_data():
+    """Test data preprocessing."""
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    assert isinstance(X, pd.DataFrame)
+    assert isinstance(y, pd.Series)
+    assert not X.empty and not y.empty
+
+def test_train_model():
+    """Test model training."""
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = train_model(X_train, y_train)
+    assert isinstance(model, RandomForestClassifier)
+    assert model.score(X_train, y_train) > 0.5
+```
+
+### 3. GitHub Actions YAML
+
+```yaml
+name: CI/CD Pipeline for RandomForest Anomaly Detector
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: pytest test_pipeline.py
+
+    - name: Train model and log to MLflow
+      run: |
+        python pipeline.py
+      env:
+        MLFLOW_TRACKING_URI: https://mlflow.yourdomain.com
+        MLFLOW_EXPERIMENT_NAME: air_quality_anomaly_detector
+```
+
+### 4. `requirements.txt`
+
+```txt
+pandas
+scikit-learn
+mlflow
+pytest
+```
+
+### Notes:
+1. **MLflow Tracking URI**: Replace `https://mlflow.yourdomain.com` with your actual MLflow tracking URI.
+2. **MLflow Experiment Name**: Replace `air_quality_anomaly_detector` with your desired experiment name.
+3. **Data Path**: Ensure the data file `air_quality.csv` is available in the `data` directory relative to the script.
+
+This pipeline will automatically run on push or pull request to the `main` branch, ensuring that the model is trained and logged to MLflow whenever changes are made to the codebase.

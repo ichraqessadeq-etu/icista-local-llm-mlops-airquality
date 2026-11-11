@@ -1,0 +1,44 @@
+{
+  "run": 8,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1402,
+    "truncated": false,
+    "seconds": 173.8
+  },
+  "extraction": {
+    "n_blocks": 5,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 2,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "        \"\"\"Test loading the dataset.\"\"\"\n        data = pipeline.load_data('data/air_quality.csv')\n>       assert isinstance(data, pd.DataFrame), \"Data should be a pandas DataFrame.\"\nE       NameError: name 'pd' is not defined\n\ntest_pipeline.py:7: NameError\n------------------------------ Captured log call ------------------------------\nINFO     pipeline:pipeline.py:16 Data loaded successfully.\n____________________________ test_preprocess_data _____________________________\n\n    def test_preprocess_data():\n        \"\"\"Test preprocessing the data.\"\"\"\n        data = pipeline.load_data('data/air_quality.csv')\n        X_train, X_test, y_train, y_test = pipeline.preprocess_data(data)\n>       assert isinstance(X_train, pd.DataFrame), \"X_train should be a pandas DataFrame.\"\nE       NameError: name 'pd' is not defined\n\ntest_pipeline.py:13: NameError\n------------------------------ Captured log call ------------------------------\nINFO     pipeline:pipeline.py:16 Data loaded successfully.\nINFO     pipeline:pipeline.py:28 Data preprocessed successfully.\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - NameError: name 'pd' is not defined\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'pd' is not d...\n2 failed, 2 passed in 6.30s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

@@ -1,0 +1,45 @@
+{
+  "run": 20,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1487,
+    "truncated": false,
+    "seconds": 420.5
+  },
+  "extraction": {
+    "n_blocks": 5,
+    "python_parse": [
+      "OK",
+      "OK",
+      "FAIL:invalid character '\u251c' (U+251C)"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 1,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "        data = pd.DataFrame({\n            'PT08.S1(CO)': [1.0, 2.0],\n            'PT08.S2(NMHC)': [3.0, 4.0],\n            'PT08.S3(NOx)': [5.0, 6.0],\n            'PT08.S4(NO2)': [7.0, 8.0],\n            'PT08.S5(O3)': [9.0, 10.0],\n            'NOx(GT)': [11.0, 12.0],\n            'C6H6(GT)': [13.0, 14.0],\n            'T': [15.0, 16.0],\n            'RH': [17.0, 18.0],\n            'AH': [19.0, 20.0],\n            'Hour': [21.0, 22.0],\n            'DayOfWeek': [23.0, 24.0],\n            'Month': [25.0, 26.0],\n            'Anomaly': [0, 1]\n        })\n        X, y = preprocess_data(data)\n>       X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\nE       NameError: name 'train_test_split' is not defined\n\ntest_pipeline.py:48: NameError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_preprocess_data - assert (2, 13) == (2, 14)\nFAILED test_pipeline.py::test_train_model - NameError: name 'train_test_split...\n2 failed, 1 passed in 5.14s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

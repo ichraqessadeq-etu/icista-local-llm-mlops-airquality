@@ -1,0 +1,6 @@
+# analysis and figure (no model call)
+numpy
+pandas
+scipy
+matplotlib
+# generation: Ollama (https://ollama.com) + a pinned execution environment, see README

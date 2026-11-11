@@ -1,0 +1,129 @@
+Here are the required files:
+
+**pipeline.py**
+```python
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import mlflow
+import mlflow.sklearn
+
+def load_data(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        raise
+
+def preprocess_data(data):
+    try:
+        # Drop unnecessary columns
+        data.drop(['Hour', 'DayOfWeek', 'Month'], axis=1, inplace=True)
+        
+        # Scale data using StandardScaler
+        scaler = StandardScaler()
+        X = scaler.fit_transform(data.drop('Anomaly', axis=1))
+        y = data['Anomaly']
+        return X, y
+    except Exception as e:
+        print(f"Error preprocessing data: {e}")
+        raise
+
+def train_model(X_train, y_train):
+    try:
+        # Train a RandomForestClassifier model
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
+        
+        # Log the model with MLflow
+        mlflow.sklearn.log_model(model, "random_forest")
+        
+        return model
+    except Exception as e:
+        print(f"Error training model: {e}")
+        raise
+```
+
+**test_pipeline.py**
+```python
+import pytest
+from pipeline import load_data, preprocess_data, train_model
+
+def test_load_data():
+    data = load_data('data/air_quality.csv')
+    assert data is not None
+
+def test_preprocess_data():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    assert X is not None
+    assert y is not None
+
+def test_train_model():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    model = train_model(X, y)
+    assert model is not None
+```
+
+**.github/workflows/ci_cd.yml**
+```yml
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest test_pipeline.py
+
+      - name: Train and deploy model
+        run: |
+          python pipeline.py
+          mlflow ui
+```
+
+**requirements.txt**
+```bash
+pandas
+scikit-learn
+mlflow
+```
+
+Note that you need to have MLflow installed and configured in your environment. Also, make sure to replace `'data/air_quality.csv'` with the actual path to your dataset.
+
+This pipeline assumes that you have a `requirements.txt` file listing all the dependencies required for the project. The GitHub Actions workflow will install these dependencies before running the tests and training the model.
+
+The `test_pipeline.py` file contains three test functions: `test_load_data`, `test_preprocess_data`, and `test_train_model`. These tests ensure that the `load_data`, `preprocess_data`, and `train_model` functions are working as expected.
+
+The `pipeline.py` file contains the functions for loading, preprocessing, and training the model. The `train_model` function logs the trained model with MLflow using the `mlflow.sklearn.log_model` function.
+
+The `.github/workflows/ci_cd.yml` file defines the CI/CD pipeline. It consists of four steps:
+
+1. Checkout code: This step checks out the code from the repository.
+2. Set up Python environment: This step sets up a Python environment with the specified version.
+3. Install dependencies: This step installs the dependencies listed in the `requirements.txt` file.
+4. Run tests: This step runs the tests defined in `test_pipeline.py`.
+5. Train and deploy model: This step trains the model using the `pipeline.py` file and logs it with MLflow.
+
+Note that this is a basic example and you may need to customize it to fit your specific use case.

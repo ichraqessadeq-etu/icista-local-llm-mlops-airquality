@@ -1,0 +1,44 @@
+{
+  "run": 5,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1500,
+    "truncated": true,
+    "seconds": 191.2
+  },
+  "extraction": {
+    "n_blocks": 2,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": null
+  },
+  "pytest": {
+    "passed": 0,
+    "failed": 4,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "______________________________ test_train_model _______________________________\n\n    def test_train_model():\n        \"\"\"Test training the model.\"\"\"\n>       X = pd.DataFrame({\n            'PT08.S1(CO)': [1, 2, 3],\n            'Anomaly': [0, 1, 0]\n        })\nE       NameError: name 'pd' is not defined\n\ntest_pipeline.py:23: NameError\n______________________________ test_run_pipeline ______________________________\n\n    def test_run_pipeline():\n        \"\"\"Test running the pipeline.\"\"\"\n>       with pytest.raises(MlflowException):\nE       NameError: name 'MlflowException' is not defined\n\ntest_pipeline.py:33: NameError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - NameError: name 'MlflowException' i...\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'pd' is not d...\nFAILED test_pipeline.py::test_train_model - NameError: name 'pd' is not defined\nFAILED test_pipeline.py::test_run_pipeline - NameError: name 'MlflowException...\n4 failed in 4.32s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

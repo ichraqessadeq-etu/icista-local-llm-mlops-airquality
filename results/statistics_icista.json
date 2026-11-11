@@ -1,0 +1,109 @@
+{
+  "gpt-4o": {
+    "folder": "runs_gpt4o_replay",
+    "n": 10,
+    "all_pass": 3,
+    "pass_rate": 0.3,
+    "wilson95": [
+      0.10778928748621183,
+      0.6032267800204347
+    ],
+    "rvh": 0,
+    "iih": 0,
+    "truncated": 0,
+    "yaml_ok": 10,
+    "failure_hints": {
+      "import_or_missing_name": 7
+    },
+    "mean_seconds": null,
+    "median_seconds": null,
+    "mean_completion_tokens": null
+  },
+  "llama3.1:8b": {
+    "folder": "runs_llama31_8b",
+    "n": 20,
+    "all_pass": 14,
+    "pass_rate": 0.7,
+    "wilson95": [
+      0.4810232237710206,
+      0.854524726031006
+    ],
+    "rvh": 0,
+    "iih": 0,
+    "truncated": 0,
+    "yaml_ok": 20,
+    "failure_hints": {
+      "import_or_missing_name": 2,
+      "other": 4
+    },
+    "mean_seconds": 271.6,
+    "median_seconds": 271.4,
+    "mean_completion_tokens": 923,
+    "fisher_p_vs_gpt4o": 0.056
+  },
+  "mistral:7b": {
+    "folder": "runs_mistral7b",
+    "n": 20,
+    "all_pass": 0,
+    "pass_rate": 0.0,
+    "wilson95": [
+      0.0,
+      0.16113012549493322
+    ],
+    "rvh": 17,
+    "iih": 0,
+    "truncated": 0,
+    "yaml_ok": 20,
+    "failure_hints": {
+      "import_or_missing_name": 16,
+      "other": 4
+    },
+    "mean_seconds": 208.7,
+    "median_seconds": 210.9,
+    "mean_completion_tokens": 774,
+    "fisher_p_vs_gpt4o": 0.03
+  },
+  "qwen2.5-coder:3b": {
+    "folder": "runs_qwen25coder3b",
+    "n": 20,
+    "all_pass": 1,
+    "pass_rate": 0.05,
+    "wilson95": [
+      0.008881219432873136,
+      0.23613589351256675
+    ],
+    "rvh": 4,
+    "iih": 0,
+    "truncated": 2,
+    "yaml_ok": 19,
+    "failure_hints": {
+      "import_or_missing_name": 18,
+      "other": 1
+    },
+    "mean_seconds": 158.1,
+    "median_seconds": 164.8,
+    "mean_completion_tokens": 1245,
+    "fisher_p_vs_gpt4o": 0.095
+  },
+  "qwen2.5-coder:7b": {
+    "folder": "runs_qwen25coder7b",
+    "n": 20,
+    "all_pass": 1,
+    "pass_rate": 0.05,
+    "wilson95": [
+      0.008881219432873136,
+      0.23613589351256675
+    ],
+    "rvh": 9,
+    "iih": 0,
+    "truncated": 0,
+    "yaml_ok": 20,
+    "failure_hints": {
+      "import_or_missing_name": 19
+    },
+    "mean_seconds": 260.1,
+    "median_seconds": 251.5,
+    "mean_completion_tokens": 991,
+    "fisher_p_vs_gpt4o": 0.095
+  }
+}

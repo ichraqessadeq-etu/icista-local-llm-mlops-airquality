@@ -1,0 +1,44 @@
+{
+  "run": 13,
+  "cost": {
+    "prompt_tokens": 203,
+    "completion_tokens": 961,
+    "truncated": false,
+    "seconds": 271.4
+  },
+  "extraction": {
+    "n_blocks": 4,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 1,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "    \n            # TODO: remove special-case; this is just to keep exception\n            #  message tests from raising while debugging\n            use_interval_msg = isinstance(ax, IntervalIndex) or (\n                isinstance(ax, CategoricalIndex)\n                and isinstance(ax.categories, IntervalIndex)\n            )\n    \n            if missing == len(indexer):\n                axis_name = self.obj._get_axis_name(axis)\n                if use_interval_msg:\n                    key = list(key)\n                raise KeyError(f\"None of [{key}] are in the [{axis_name}]\")\n    \n            not_found = list(ensure_index(key)[missing_mask.nonzero()[0]].unique())\n>           raise KeyError(f\"{not_found} not in index\")\nE           KeyError: \"['PT08.S1(CO)', 'PT08.S2(NMHC)', 'PT08.S3(NOx)', 'PT08.S4(NO2)', 'PT08.S5(O3)', 'NOx(GT)', 'C6H6(GT)'] not in index\"\n\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\pandas\\core\\indexing.py:1377: KeyError\n---------------------------- Captured stdout call -----------------------------\nError preprocessing data: \"['PT08.S1(CO)', 'PT08.S2(NMHC)', 'PT08.S3(NOx)', 'PT08.S4(NO2)', 'PT08.S5(O3)', 'NOx(GT)', 'C6H6(GT)'] not in index\"\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_preprocess_data - KeyError: \"['PT08.S1(CO)', 'P...\nFAILED test_pipeline.py::test_train_model - KeyError: \"['PT08.S1(CO)', 'PT08....\n2 failed, 1 passed in 4.42s",
+    "all_pass": false,
+    "failure_hint": "other"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

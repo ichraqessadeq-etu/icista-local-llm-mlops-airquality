@@ -1,0 +1,44 @@
+{
+  "run": 13,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1401,
+    "truncated": false,
+    "seconds": 174.4
+  },
+  "extraction": {
+    "n_blocks": 3,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 0,
+    "failed": 3,
+    "errors": 0,
+    "returncode": 1,
+    "tail": ">           assert isinstance(model, RandomForestClassifier)\nE           NameError: name 'RandomForestClassifier' is not defined\n\ntest_pipeline.py:34: NameError\n\nDuring handling of the above exception, another exception occurred:\n\n    def test_train_model():\n        \"\"\"Test the train_model function.\"\"\"\n        try:\n            data = load_data('data/air_quality.csv')\n            X_train, y_train, X_test, y_test = preprocess_data(data)\n            model = train_model(X_train, y_train)\n            assert isinstance(model, RandomForestClassifier)\n            logging.info(\"train_model function test passed.\")\n        except Exception as e:\n>           logging.error(f\"Test failed: {e}\")\nE           NameError: name 'logging' is not defined\n\ntest_pipeline.py:37: NameError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - NameError: name 'logging' is not de...\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'logging' is ...\nFAILED test_pipeline.py::test_train_model - NameError: name 'logging' is not ...\n3 failed in 4.64s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

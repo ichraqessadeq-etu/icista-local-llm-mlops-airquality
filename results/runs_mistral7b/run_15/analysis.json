@@ -1,0 +1,40 @@
+{
+  "run": 15,
+  "cost": {
+    "prompt_tokens": 241,
+    "completion_tokens": 739,
+    "truncated": false,
+    "seconds": 194.7
+  },
+  "extraction": {
+    "n_blocks": 3,
+    "python_parse": [
+      "FAIL:expected an indented block after function definition on line 10",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 0,
+    "failed": 0,
+    "errors": 1,
+    "returncode": 2,
+    "tail": "    mod = import_path(self.path, mode=importmode, root=self.config.rootpath)\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\_pytest\\pathlib.py:567: in import_path\n    importlib.import_module(module_name)\nC:\\Program Files\\Odoo 16.0.20230507\\python\\lib\\importlib\\__init__.py:127: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n<frozen importlib._bootstrap>:1006: in _gcd_import\n    ???\n<frozen importlib._bootstrap>:983: in _find_and_load\n    ???\n<frozen importlib._bootstrap>:967: in _find_and_load_unlocked\n    ???\n<frozen importlib._bootstrap>:677: in _load_unlocked\n    ???\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\_pytest\\assertion\\rewrite.py:186: in exec_module\n    exec(co, module.__dict__)\ntest_pipeline.py:2: in <module>\n    from pipeline import load_data, preprocess_data, train_model\nE     File \"C:\\Users\\ADMIN\\Desktop\\maThese\\ICISTA\\code\\runs_mistral7b\\run_15\\pipeline.py\", line 14\nE       def train_model(X_train, y_train):\nE         ^\nE   IndentationError: expected an indented block\n=========================== short test summary info ===========================\nERROR test_pipeline.py\n!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.21s",
+    "all_pass": false,
+    "failure_hint": "other"
+  },
+  "static": {
+    "pipeline": {
+      "parses": false
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

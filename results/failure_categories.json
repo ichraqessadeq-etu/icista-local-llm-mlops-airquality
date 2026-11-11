@@ -1,0 +1,37 @@
+{
+  "gpt-4o": {
+    "pass": 3,
+    "mlflow_api": 0,
+    "missing_name": 7,
+    "data_logic": 0,
+    "collection": 0
+  },
+  "qwen2.5-coder:3b": {
+    "pass": 1,
+    "mlflow_api": 2,
+    "missing_name": 17,
+    "data_logic": 0,
+    "collection": 0
+  },
+  "qwen2.5-coder:7b": {
+    "pass": 1,
+    "mlflow_api": 6,
+    "missing_name": 13,
+    "data_logic": 0,
+    "collection": 0
+  },
+  "llama3.1:8b": {
+    "pass": 14,
+    "mlflow_api": 1,
+    "missing_name": 1,
+    "data_logic": 4,
+    "collection": 0
+  },
+  "mistral:7b": {
+    "pass": 0,
+    "mlflow_api": 4,
+    "missing_name": 12,
+    "data_logic": 1,
+    "collection": 3
+  }
+}

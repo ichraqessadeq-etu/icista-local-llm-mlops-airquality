@@ -1,0 +1,44 @@
+{
+  "run": 15,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1466,
+    "truncated": false,
+    "seconds": 185.1
+  },
+  "extraction": {
+    "n_blocks": 3,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 1,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "\n    def test_train_model():\n>       data = pd.DataFrame({\n            'PT08.S1(CO)': [1, 2, 3],\n            'PT08.S2(NMHC)': [4, 5, 6],\n            'PT08.S3(NOx)': [7, 8, 9],\n            'PT08.S4(NO2)': [10, 11, 12],\n            'PT08.S5(O3)': [13, 14, 15],\n            'NOx(GT)': [16, 17, 18],\n            'C6H6(GT)': [19, 20, 21],\n            'T': [22, 23, 24],\n            'RH': [25, 26, 27],\n            'AH': [28, 29, 30],\n            'Hour': [31, 32, 33],\n            'DayOfWeek': [34, 35, 36],\n            'Month': [37, 38, 39],\n            'Anomaly': [0, 1, 0]\n        })\nE       NameError: name 'pd' is not defined\n\ntest_pipeline.py:32: NameError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'pd' is not d...\nFAILED test_pipeline.py::test_train_model - NameError: name 'pd' is not defined\n2 failed, 1 passed in 4.25s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

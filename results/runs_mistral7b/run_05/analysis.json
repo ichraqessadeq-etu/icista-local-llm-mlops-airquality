@@ -1,0 +1,51 @@
+{
+  "run": 5,
+  "cost": {
+    "prompt_tokens": 241,
+    "completion_tokens": 620,
+    "truncated": false,
+    "seconds": 161.8
+  },
+  "extraction": {
+    "n_blocks": 3,
+    "python_parse": [
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 0,
+    "failed": 1,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "C:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\tracking\\fluent.py:780: in log_artifact\n    MlflowClient().log_artifact(run_id, local_path, artifact_path)\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\tracking\\client.py:1136: in log_artifact\n    self._tracking_client.log_artifact(run_id, local_path, artifact_path)\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\tracking\\_tracking_service\\client.py:460: in log_artifact\n    artifact_repo.log_artifact(local_path, artifact_path)\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\store\\artifact\\local_artifact_repo.py:27: in log_artifact\n    verify_artifact_path(artifact_path)\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\store\\artifact\\artifact_repo.py:303: in verify_artifact_path\n    if artifact_path and path_not_unique(artifact_path):\nC:\\Users\\ADMIN\\AppData\\Roaming\\Python\\Python37\\site-packages\\mlflow\\utils\\validation.py:83: in path_not_unique\n    norm = posixpath.normpath(name)\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\npath = RandomForestClassifier()\n\n    def normpath(path):\n        \"\"\"Normalize path, eliminating double slashes, etc.\"\"\"\n>       path = os.fspath(path)\nE       TypeError: expected str, bytes or os.PathLike object, not RandomForestClassifier\n\nC:\\Program Files\\Odoo 16.0.20230507\\python\\lib\\posixpath.py:340: TypeError\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::TestPipeline::test_train_model - TypeError: expected...\n1 failed in 5.96s",
+    "all_pass": false,
+    "failure_hint": "other"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": true,
+      "rvh_violations": [
+        {
+          "kind": "RVH",
+          "rule": "unseeded_estimator",
+          "detail": "RandomForestClassifier(...) called without random_state",
+          "lineno": 15
+        }
+      ],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": true,
+  "is_iih": false
+}

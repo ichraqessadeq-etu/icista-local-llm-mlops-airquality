@@ -1,0 +1,127 @@
+Sure, I'll provide you with the necessary files for a production-ready CI/CD pipeline for a RandomForest anomaly detector. Here's the breakdown:
+
+1. **pipeline.py**: This file will contain the functions to load data, preprocess it, and train the model.
+2. **test_pipeline.py**: This file will contain the pytest tests for the pipeline functions.
+3. **.github/workflows/ci_cd.yml**: This file will define the GitHub Actions workflow for the CI/CD pipeline.
+
+### 1. pipeline.py
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+import mlflow
+import mlflow.sklearn
+
+def load_data(file_path):
+    """Load data from a CSV file."""
+    return pd.read_csv(file_path)
+
+def preprocess_data(data):
+    """Preprocess the data by separating features and target."""
+    X = data.drop(columns=['Anomaly'])
+    y = data['Anomaly']
+    return X, y
+
+def train_model(X_train, y_train):
+    """Train a RandomForestClassifier and log it using MLflow."""
+    with mlflow.start_run():
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
+        mlflow.log_param("n_estimators", 100)
+        mlflow.log_param("random_state", 42)
+        mlflow.sklearn.log_model(model, "model")
+        y_pred = model.predict(X_train)
+        accuracy = accuracy_score(y_train, y_pred)
+        mlflow.log_metric("train_accuracy", accuracy)
+    return model
+
+def evaluate_model(model, X_test, y_test):
+    """Evaluate the model on test data."""
+    y_pred = model.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    return accuracy
+```
+
+### 2. test_pipeline.py
+
+```python
+import pandas as pd
+from pipeline import load_data, preprocess_data, train_model, evaluate_model
+
+def test_load_data():
+    data = load_data('data/air_quality.csv')
+    assert not data.empty
+
+def test_preprocess_data():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    assert X.shape[1] == 13  # 12 features + 1 target
+    assert y.shape[0] == X.shape[0]
+
+def test_train_model():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = train_model(X_train, y_train)
+    assert isinstance(model, RandomForestClassifier)
+    test_accuracy = evaluate_model(model, X_test, y_test)
+    assert test_accuracy >= 0.5  # Assuming a reasonable threshold for accuracy
+```
+
+### 3. .github/workflows/ci_cd.yml
+
+```yaml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas scikit-learn mlflow pytest
+
+    - name: Run tests
+      run: pytest test_pipeline.py
+
+    - name: Train model and log to MLflow
+      run: |
+        python pipeline.py
+```
+
+### Explanation:
+
+1. **pipeline.py**:
+   - `load_data`: Loads the data from a CSV file.
+   - `preprocess_data`: Separates the features (`X`) and target (`y`).
+   - `train_model`: Trains a RandomForestClassifier and logs it using MLflow.
+   - `evaluate_model`: Evaluates the model on test data.
+
+2. **test_pipeline.py**:
+   - Contains tests for loading data, preprocessing, training the model, and evaluating the model.
+
+3. **.github/workflows/ci_cd.yml**:
+   - Defines a GitHub Actions workflow that runs on push or pull request to the `main` branch.
+   - Checks out the code, sets up Python, installs dependencies, runs tests, and trains the model and logs it to MLflow.
+
+This setup ensures that your model is trained and evaluated automatically on every push or pull request to the `main` branch, and the model is logged to MLflow for versioning and tracking.

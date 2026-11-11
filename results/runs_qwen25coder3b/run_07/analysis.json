@@ -1,0 +1,45 @@
+{
+  "run": 7,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1500,
+    "truncated": true,
+    "seconds": 187.1
+  },
+  "extraction": {
+    "n_blocks": 4,
+    "python_parse": [
+      "OK",
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 2,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "\nDuring handling of the above exception, another exception occurred:\n\n    def test_preprocess_data():\n        \"\"\"Test preprocessing data.\"\"\"\n        try:\n            data = pipeline.load_data('data/air_quality.csv')\n            X_train, X_test, y_train, y_test = pipeline.preprocess_data(data)\n            assert isinstance(X_train, pd.DataFrame)\n            assert isinstance(X_test, pd.DataFrame)\n            assert isinstance(y_train, pd.Series)\n            assert isinstance(y_test, pd.Series)\n            assert X_train.shape[0] > 0\n            assert X_test.shape[0] > 0\n            assert y_train.shape[0] > 0\n            assert y_test.shape[0] > 0\n        except Exception as e:\n>           pytest.fail(f\"Test failed: {e}\")\nE           Failed: Test failed: name 'pd' is not defined\n\ntest_pipeline.py:27: Failed\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - Failed: Test failed: name 'pd' is n...\nFAILED test_pipeline.py::test_preprocess_data - Failed: Test failed: name 'pd...\n2 failed, 2 passed in 6.31s",
+    "all_pass": false,
+    "failure_hint": "other"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

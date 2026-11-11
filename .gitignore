@@ -1,0 +1,9 @@
+# secrets
+.env
+.env.*
+# caches and run outputs re-created by the scripts
+__pycache__/
+*.pyc
+.pytest_cache/
+mlruns/
+data/

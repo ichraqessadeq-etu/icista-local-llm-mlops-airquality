@@ -1,0 +1,45 @@
+{
+  "run": 1,
+  "cost": {
+    "prompt_tokens": 206,
+    "completion_tokens": 1177,
+    "truncated": false,
+    "seconds": 185.1
+  },
+  "extraction": {
+    "n_blocks": 4,
+    "python_parse": [
+      "OK",
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 1,
+    "failed": 3,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "1916    0\n4630    0\n4786    0\n2876    0\n3832    0\nName: Anomaly, Length: 1452, dtype: int64)\n\n    def test_train_model(data):\n        \"\"\"Test training the model.\"\"\"\n        X_train, y_train, _, _ = data\n        model = train_model(X_train, y_train)\n>       assert isinstance(model, RandomForestClassifier)\nE       NameError: name 'RandomForestClassifier' is not defined\n\ntest_pipeline.py:30: NameError\n----------------------------- Captured log setup ------------------------------\nINFO     pipeline:pipeline.py:16 Data loaded successfully.\nINFO     pipeline:pipeline.py:39 Data preprocessed successfully.\n------------------------------ Captured log call ------------------------------\nINFO     pipeline:pipeline.py:54 Model trained successfully.\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_load_data - Failed: DID NOT RAISE <class 'FileN...\nFAILED test_pipeline.py::test_preprocess_data - NameError: name 'pd' is not d...\nFAILED test_pipeline.py::test_train_model - NameError: name 'RandomForestClas...\n3 failed, 1 passed in 39.49s",
+    "all_pass": false,
+    "failure_hint": "import_or_missing_name"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

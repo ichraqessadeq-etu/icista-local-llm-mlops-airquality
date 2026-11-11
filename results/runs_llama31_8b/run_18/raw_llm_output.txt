@@ -1,0 +1,131 @@
+Here are the required files:
+
+**pipeline.py**
+```python
+import pandas as pd
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+import mlflow.sklearn
+
+def load_data(file_path):
+    try:
+        data = pd.read_csv(file_path)
+        return data
+    except Exception as e:
+        print(f"Error loading data: {e}")
+        return None
+
+def preprocess_data(data):
+    try:
+        # Drop unnecessary columns
+        data.drop(['Hour', 'DayOfWeek', 'Month'], axis=1, inplace=True)
+        
+        # Convert categorical variables to numerical
+        data['AH'] = pd.Categorical(data['AH']).codes
+        
+        # Scale data
+        scaler = StandardScaler()
+        X = scaler.fit_transform(data.drop('Anomaly', axis=1))
+        y = data['Anomaly']
+        return X, y
+    except Exception as e:
+        print(f"Error preprocessing data: {e}")
+        return None, None
+
+def train_model(X_train, y_train):
+    try:
+        model = RandomForestClassifier(n_estimators=100, random_state=42)
+        with mlflow.start_run():
+            mlflow.sklearn.log_model(model, "random_forest")
+            model.fit(X_train, y_train)
+        return model
+    except Exception as e:
+        print(f"Error training model: {e}")
+        return None
+```
+
+**test_pipeline.py**
+```python
+import pytest
+from pipeline import load_data, preprocess_data, train_model
+
+def test_load_data():
+    data = load_data('data/air_quality.csv')
+    assert data is not None
+
+def test_preprocess_data():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    assert X is not None
+    assert y is not None
+
+def test_train_model():
+    data = load_data('data/air_quality.csv')
+    X, y = preprocess_data(data)
+    model = train_model(X, y)
+    assert model is not None
+```
+
+**.github/workflows/ci_cd.yml**
+```yaml
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest
+
+      - name: Train model
+        run: |
+          python pipeline.py train_model
+
+      - name: Deploy model
+        uses: actions/gha-deploy@v1
+        with:
+          model-name: random_forest
+          model-version: ${{ github.sha }}
+```
+
+**requirements.txt**
+```bash
+pandas
+numpy
+scikit-learn
+mlflow
+```
+
+Note: This is a basic example and you may need to modify it to fit your specific use case. Also, this example assumes that the data is stored in a file named `air_quality.csv` in the `data` directory. You may need to adjust the file path and the data loading code accordingly.
+
+This pipeline will:
+
+1. Load the data from the `air_quality.csv` file.
+2. Preprocess the data by dropping unnecessary columns, converting categorical variables to numerical, and scaling the data.
+3. Split the data into training and testing sets.
+4. Train a random forest classifier on the training data.
+5. Log the trained model to MLflow.
+6. Run the tests using pytest.
+7. Deploy the trained model to a model serving platform (in this case, GitHub Actions).
+
+The pipeline uses MLflow to log the trained model and track its performance. The tests are run using pytest, and the pipeline is deployed using GitHub Actions.

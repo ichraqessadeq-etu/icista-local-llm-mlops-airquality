@@ -1,0 +1,45 @@
+{
+  "run": 2,
+  "cost": {
+    "prompt_tokens": 203,
+    "completion_tokens": 1018,
+    "truncated": false,
+    "seconds": 322.9
+  },
+  "extraction": {
+    "n_blocks": 4,
+    "python_parse": [
+      "OK",
+      "OK",
+      "OK"
+    ],
+    "yaml_parses": true
+  },
+  "pytest": {
+    "passed": 1,
+    "failed": 2,
+    "errors": 0,
+    "returncode": 1,
+    "tail": "================================== FAILURES ===================================\n____________________________ test_preprocess_data _____________________________\n\n    def test_preprocess_data():\n        data = load_data('data/air_quality.csv')\n>       X_train, X_test, y_train, y_test = preprocess_data(data)\nE       TypeError: cannot unpack non-iterable NoneType object\n\ntest_pipeline.py:10: TypeError\n---------------------------- Captured stdout call -----------------------------\nError preprocessing data: \"['PT08.S1(CO)_mean' 'PT08.S2(NMHC)_mean' 'PT08.S3(NOx)_mean'\\n 'PT08.S4(NO2)_mean' 'PT08.S5(O3)_mean' 'NOx(GT)_mean' 'C6H6(GT)_mean'\\n 'T_mean' 'RH_mean' 'AH_mean'] not found in axis\"\n______________________________ test_train_model _______________________________\n\n    def test_train_model():\n        data = load_data('data/air_quality.csv')\n>       X_train, X_test, y_train, y_test = preprocess_data(data)\nE       TypeError: cannot unpack non-iterable NoneType object\n\ntest_pipeline.py:15: TypeError\n---------------------------- Captured stdout call -----------------------------\nError preprocessing data: \"['PT08.S1(CO)_mean' 'PT08.S2(NMHC)_mean' 'PT08.S3(NOx)_mean'\\n 'PT08.S4(NO2)_mean' 'PT08.S5(O3)_mean' 'NOx(GT)_mean' 'C6H6(GT)_mean'\\n 'T_mean' 'RH_mean' 'AH_mean'] not found in axis\"\n=========================== short test summary info ===========================\nFAILED test_pipeline.py::test_preprocess_data - TypeError: cannot unpack non-...\nFAILED test_pipeline.py::test_train_model - TypeError: cannot unpack non-iter...\n2 failed, 1 passed in 5.33s",
+    "all_pass": false,
+    "failure_hint": "other"
+  },
+  "static": {
+    "pipeline": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    },
+    "test": {
+      "parses": true,
+      "is_rvh": false,
+      "rvh_violations": [],
+      "is_iih": false,
+      "iih_violations": []
+    }
+  },
+  "is_rvh": false,
+  "is_iih": false
+}

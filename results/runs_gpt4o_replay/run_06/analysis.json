@@ -1,0 +1,38 @@
+{
+ "run": 6,
+ "cost": {},
+ "extraction": {
+  "n_blocks": 3,
+  "python_parse": [
+   "OK",
+   "OK"
+  ],
+  "yaml_parses": true
+ },
+ "pytest": {
+  "passed": 4,
+  "failed": 0,
+  "errors": 0,
+  "returncode": 0,
+  "tail": "....                                                                     [100%]\n4 passed in 42.19s",
+  "all_pass": true
+ },
+ "static": {
+  "pipeline": {
+   "parses": true,
+   "is_rvh": false,
+   "rvh_violations": [],
+   "is_iih": false,
+   "iih_violations": []
+  },
+  "test": {
+   "parses": true,
+   "is_rvh": false,
+   "rvh_violations": [],
+   "is_iih": false,
+   "iih_violations": []
+  }
+ },
+ "is_rvh": false,
+ "is_iih": false
+}
