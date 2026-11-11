@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Extra figures of the ICISTA paper.
 
-    py -3.13 make_figures_extra.py   -> ../paper/fig_method.pdf, ../paper/fig_cost.pdf
+    py -3.13 make_figures_extra.py   -> ../figures/fig_method.pdf, ../figures/fig_cost.pdf
 """
 import json
 import matplotlib
@@ -38,8 +38,8 @@ box(70, 3, 29, 15, "Static detectors\nRVH / IIH", GOLD)
 arrow(16, 24, 21, 32); arrow(16, 20, 21, 11)
 arrow(42, 33, 47, 25); arrow(42, 10, 47, 19)
 arrow(63, 25, 69, 32); arrow(63, 19, 69, 11)
-fig.savefig("../paper/fig_method.pdf", bbox_inches="tight", pad_inches=0.02)
-fig.savefig("../paper/fig_method.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
+fig.savefig("../figures/fig_method.pdf", bbox_inches="tight", pad_inches=0.02)
+fig.savefig("../figures/fig_method.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
 
 # ---------------------------------------------------------------- Fig. cost vs quality (single column)
 S = json.load(open("statistics_icista.json", encoding="utf-8"))
@@ -67,6 +67,6 @@ ax.set_ylabel("Generations passing (%)", fontsize=6.5)
 ax.tick_params(labelsize=6.5)
 ax.spines[["top", "right"]].set_visible(False)
 fig.tight_layout()
-fig.savefig("../paper/fig_cost.pdf", bbox_inches="tight", pad_inches=0.02)
-fig.savefig("../paper/fig_cost.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
+fig.savefig("../figures/fig_cost.pdf", bbox_inches="tight", pad_inches=0.02)
+fig.savefig("../figures/fig_cost.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
 print("saved fig_method + fig_cost")
