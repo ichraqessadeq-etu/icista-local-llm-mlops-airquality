@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Fig. 1 of the ICISTA paper: outcome of every generation per model (pass or failure category).
 
-    py -3.13 classify_failures.py && py -3.13 make_figure_icista.py   -> ../figures/fig1.pdf
+    py -3.13 classify_failures.py && py -3.13 make_figure_icista.py   -> ../paper/fig1.pdf
 """
 import json
 import matplotlib
@@ -40,7 +40,7 @@ ax.tick_params(axis="x", labelsize=6.5)
 ax.spines[["top", "right"]].set_visible(False)
 handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, _, c in CATS]
 ax.legend(handles, [n for _, n, _ in CATS], frameon=False, fontsize=5.8, ncol=2, loc="upper center",
-          bbox_to_anchor=(0.45, -0.25), handlelength=1.0, columnspacing=0.8)
+          bbox_to_anchor=(0.45, -0.33), handlelength=1.0, columnspacing=0.8)
 fig.tight_layout()
-fig.savefig("../figures/fig1.pdf", bbox_inches="tight", pad_inches=0.02); fig.savefig("../figures/fig1.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
-print("saved ../figures/fig1.pdf")
+fig.savefig("../paper/fig1.pdf", bbox_inches="tight", pad_inches=0.02); fig.savefig("../paper/fig1.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
+print("saved ../paper/fig1.pdf")
