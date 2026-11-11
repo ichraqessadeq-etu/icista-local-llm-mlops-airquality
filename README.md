@@ -1,5 +1,7 @@
 # Locally run open-weight LLMs for smart-city MLOps pipelines
 
+[![DOI](https://zenodo.org/badge/1453741027.svg)](https://doi.org/10.5281/zenodo.24131237)
+
 Code and data for **"Sovereign LLM-Augmented MLOps for Smart Cities: Can Locally Run Open-Weight Models
 Generate Executable CI/CD Pipelines for Air-Quality Monitoring?"** (I. Essadeq, S. Nouh, K. Kandali),
 submitted to ICISTA 2027.
@@ -75,5 +77,5 @@ doi:10.1016/j.snb.2007.09.060), distributed by the UCI Machine Learning Reposito
 
 ## Citation and license
 
-See `CITATION.cff`. Code: MIT (see `LICENSE`). Model outputs in `results/` are released for research
+Archived on Zenodo: [10.5281/zenodo.24131237](https://doi.org/10.5281/zenodo.24131237) (this DOI always resolves to the latest version). See `CITATION.cff`. Code: MIT (see `LICENSE`). Model outputs in `results/` are released for research
 reproducibility; each model is subject to its own license.
