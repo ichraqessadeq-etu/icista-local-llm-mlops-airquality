@@ -42,5 +42,5 @@ handles = [plt.Rectangle((0, 0), 1, 1, color=c) for _, _, c in CATS]
 ax.legend(handles, [n for _, n, _ in CATS], frameon=False, fontsize=5.8, ncol=2, loc="upper center",
           bbox_to_anchor=(0.45, -0.25), handlelength=1.0, columnspacing=0.8)
 fig.tight_layout()
-fig.savefig("../figures/fig1.pdf"); fig.savefig("../figures/fig1.png", dpi=200)
+fig.savefig("../figures/fig1.pdf", bbox_inches="tight", pad_inches=0.02); fig.savefig("../figures/fig1.png", dpi=200, bbox_inches="tight", pad_inches=0.02)
 print("saved ../figures/fig1.pdf")
